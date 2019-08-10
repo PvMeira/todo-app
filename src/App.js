@@ -1,24 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
-import Counter from './components/counter/counter'
+import TodoApp from './components/core/TodoApp'
 
 function App() {
   return (
     <div className="App">
-     <LearningComponents></LearningComponents>
+      <TodoApp></TodoApp>
     </div>
   );
 }
 
-class LearningComponents extends Component {
-  render () {
-    return (
-      <div>
-        <Counter></Counter>
-      </div>
-      
-    );
-  }
-}
 
 export default App;
