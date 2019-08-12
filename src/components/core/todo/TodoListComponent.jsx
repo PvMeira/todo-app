@@ -1,18 +1,29 @@
 import React, {Component} from 'react';
+import TodoService from '../../../api/todo/TodoService.js'
+import AuthenticationService from '../authentication/AuthenticationService.js'
 
 
 class TodoListComponent extends Component {
 
     constructor(props) {
         super(props);
+        this.listTodosByUsername = this.listTodosByUsername.bind(this);
+        this.state = { todos : [] };
+    }
 
-        this.state = {
-            todos : [
-                { id: 1, description: 'Mehhhhhhh', done: false, targetDate: new Date()}, 
-                { id: 2, description: 'Mehhhhhhh', done: false, targetDate: new Date()}, 
-                { id: 3, description: 'Mehhhhhhh', done: false, targetDate: new Date()}
-            ] 
-        };
+    componentDidMount() {
+        this.listTodosByUsername(AuthenticationService.getLoggedUsername());
+    }
+
+    listTodosByUsername(username) {
+        TodoService.listTodosByUsername(username)
+                   .then(response => {
+                       this.setState({
+                           todos: response.data
+                       }); 
+                       console.log(response)
+                   })
+                   .catch(error => console.log(error));
     }
 
     render() {
@@ -33,7 +44,7 @@ class TodoListComponent extends Component {
                                     <tr key={todo.id}>
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
-                                        <td>{todo.targetDate.toISOString()}</td>
+                                        <td>{todo.targetData}</td>
                                     </tr>
                             )
                         }
