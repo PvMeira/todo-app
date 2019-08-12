@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import AuthenticationService from './authentication/AuthenticationService.js'
 
 class LoginComponent extends Component {
 
@@ -17,27 +18,29 @@ class LoginComponent extends Component {
 
     render() {
         return (
-            <div className="LoginComponent">
-            
-                {this.state.authorized && <div>Login Aproved</div>}
-                {this.state.error && <div>Login Denied</div>}
-                Username : <input type="text" 
-                                  name="username" 
-                                  value={this.state.username}
-                                  onChange = {this.defaultFormHandler}/>
-                Password : <input type="password" 
-                                  name="password" 
-                                  value={this.state.password}
-                                  onChange = {this.defaultFormHandler}/>
-                <button type="submit"
-                        onClick={this.submitLogin}>Login</button>
-            </div>
+            <div>
+                <h1>Login</h1>
+                <div className="container">         
+                    {this.state.authorized && <div>Login Aproved</div>}
+                    {this.state.error && <div className="alert alert-error">Invalid Credentials</div>}
+                        User Name: <input type="text" 
+                                        name="username" 
+                                        value={this.state.username} 
+                                        onChange={this.defaultFormHandler}/>
+                        Password: <input type="password" 
+                                        name="password" 
+                                        value={this.state.password}  
+                                        onChange={this.defaultFormHandler}/>
+                        <button className="btn btn-success" onClick={this.submitLogin}>Login</button>
+                </div>
+        </div>
         );
     }
     submitLogin() {
         console.log(`username is ` + this.state.username);
         if (this.state.username === 'tb' && this.state.password === 'tb') {
-            this.props.history.push(`todoApp/welcome/${this.state.username}`);
+            AuthenticationService.registerSuccessfullLogin(this.state.username, this.state.password);
+            this.props.history.push(`welcome/${this.state.username}`);
         } else {
             this.setState(
                 {

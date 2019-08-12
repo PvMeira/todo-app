@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 
 class HomeComponent extends Component {
 
     render() {
         return (
             <div className="HomeComponent">
-                <h1>HOME</h1>
-                <h2>{`Welcome ${this.props.match.params.username}`}</h2>
+                <h1>Welcome!</h1>
+                <div className="container">
+                Welcome {this.props.match.params.username}. You can manage your todos <Link to="/todoApp/todos"> Click here</Link>.
+                </div>
             </div>
         );
     }
