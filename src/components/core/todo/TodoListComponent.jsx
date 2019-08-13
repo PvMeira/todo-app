@@ -7,8 +7,12 @@ class TodoListComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.listTodosByUsername = this.listTodosByUsername.bind(this);
+
         this.state = { todos : [] };
+
+        this.listTodosByUsername = this.listTodosByUsername.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
+        this.updateTodo = this.updateTodo.bind(this);
     }
 
     componentDidMount() {
@@ -21,9 +25,19 @@ class TodoListComponent extends Component {
                        this.setState({
                            todos: response.data
                        }); 
-                       console.log(response)
                    })
                    .catch(error => console.log(error));
+    }
+
+    deleteTodo(id) {
+        TodoService.delete(AuthenticationService.getLoggedUsername(), id)
+                   .then( response => console.log(response))
+                   .catch(error => console.error(error));
+    }
+
+    updateTodo(id) {
+        console.log(id);
+        this.props.history.push(`todos/edit/${id}`);
     }
 
     render() {
@@ -35,6 +49,7 @@ class TodoListComponent extends Component {
                             <th>Description</th>
                             <th>Status</th>
                             <th>Date</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,6 +60,12 @@ class TodoListComponent extends Component {
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
                                         <td>{todo.targetData}</td>
+                                        <td>
+                                            <button className="btn btn-info"
+                                                    onClick={() => this.updateTodo(todo.id)}>Edit</button>
+                                            <button className="btn btn-warning" 
+                                                    onClick={() => this.deleteTodo(todo.id)}>Delete</button>
+                                        </td>
                                     </tr>
                             )
                         }
