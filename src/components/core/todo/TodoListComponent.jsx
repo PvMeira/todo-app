@@ -13,6 +13,7 @@ class TodoListComponent extends Component {
         this.listTodosByUsername = this.listTodosByUsername.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.updateTodo = this.updateTodo.bind(this);
+        this.newTodo = this.newTodo.bind(this);
     }
 
     componentDidMount() {
@@ -36,8 +37,10 @@ class TodoListComponent extends Component {
     }
 
     updateTodo(id) {
-        console.log(id);
         this.props.history.push(`todos/edit/${id}`);
+    }
+    newTodo() {
+        this.props.history.push(`todos/edit`);
     }
 
     render() {
@@ -71,6 +74,9 @@ class TodoListComponent extends Component {
                         }
                     </tbody>
                 </table>
+                <div className="row">
+                    <button className="btn btn-success" onClick={this.newTodo}>New TODO</button>
+                </div>
             </div>
         );
     }

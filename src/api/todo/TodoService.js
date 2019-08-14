@@ -11,7 +11,15 @@ class TodoService {
     }
 
     findbyId(id) {
-        return {"id":4,"username":"TB","description":"This is a teste with id 4","targetData":"2019-08-13T01:43:35.712+0000","done":true}
+        return axios.get(`${process.env.REACT_APP_BACK_END_URL}/${context}/${id}`);
+    }
+
+    update(id, body) {
+        return axios.put(`${process.env.REACT_APP_BACK_END_URL}/${context}/${id}`, body);
+    }
+
+    save(username, body) {
+        return axios.post(`${process.env.REACT_APP_BACK_END_URL}/${context}/${username}`, body);
     }
 }
 

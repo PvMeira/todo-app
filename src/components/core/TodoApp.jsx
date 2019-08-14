@@ -24,6 +24,7 @@ class TodoApp extends Component {
                             <AuthenticatorRouter path = {apiPath + '/logout'} component = {LogoutComponent}/>
                             <AuthenticatorRouter path = {apiPath + '/welcome/:username'} component = {HomeComponent}/>
                             <AuthenticatorRouter path = {apiPath + '/todos/edit/:id'} component = {TodoEditComponent}/>
+                            <AuthenticatorRouter path = {apiPath + '/todos/edit'} component = {TodoEditComponent}/>
                             <AuthenticatorRouter path = {apiPath + '/todos'} component = {TodoListComponent}/>
                             <Route component = {NotfoundComponent}/>
                         </Switch>
