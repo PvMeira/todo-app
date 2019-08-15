@@ -5,6 +5,7 @@ import TodoListComponent from './todo/TodoListComponent'
 import HeaderComponent from './HeaderComponent'
 import FooterComponent from './FooterComponent'
 import LogoutComponent from './LogoutComponent'
+import TodoEditComponent from './todo/TodoEditComponent'
 import AuthenticatorRouter from './authentication/AuthenticatorRouter'
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
@@ -22,6 +23,8 @@ class TodoApp extends Component {
                             <Route path = {apiPath + '/login'} component = {LoginComponent}/>
                             <AuthenticatorRouter path = {apiPath + '/logout'} component = {LogoutComponent}/>
                             <AuthenticatorRouter path = {apiPath + '/welcome/:username'} component = {HomeComponent}/>
+                            <AuthenticatorRouter path = {apiPath + '/todos/edit/:id'} component = {TodoEditComponent}/>
+                            <AuthenticatorRouter path = {apiPath + '/todos/edit'} component = {TodoEditComponent}/>
                             <AuthenticatorRouter path = {apiPath + '/todos'} component = {TodoListComponent}/>
                             <Route component = {NotfoundComponent}/>
                         </Switch>

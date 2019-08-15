@@ -38,17 +38,22 @@ class LoginComponent extends Component {
     }
     submitLogin() {
         console.log(`username is ` + this.state.username);
-        if (this.state.username === 'tb' && this.state.password === 'tb') {
-            AuthenticationService.registerSuccessfullLogin(this.state.username, this.state.password);
+        AuthenticationService.verifyUser(this.state.username, this.state.password)
+        .then(
+            () => {
+                AuthenticationService.registerSuccessfullLogin(this.state.username, this.state.password);
             this.props.history.push(`welcome/${this.state.username}`);
-        } else {
+            }
+                
+        )
+        .catch( () => {
             this.setState(
                 {
                     error: true,
                     authorized: false
                 }
             );
-        }
+        });
     }
 
     defaultFormHandler(synteticEvent) {
